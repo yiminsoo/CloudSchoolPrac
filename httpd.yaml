@@ -1,24 +1,7 @@
 ---
-- name: 웹서버 설치
-  hosts: all
+- hosts: all
   become: yes
-  
+
   tasks:
-    - name: nginx
-      apt:
-        name: nginx
-        state: present
-    - name: index.html
-      get_url:
-        url: https://www.jobkorea.co.kr
-        dest: /var/www/html
-    - name: service 
-      service:
-        name: nginx
-        state: started
-        enabled: true
-    - name: ufw
-      service:
-        name: ufw
-        state: stopped
-        enabled: false
+    - name: Create Docker Service
+      shell: docker service create --name mynginx --replicas 3 --constraint node.role==worker --with-registry-auth -p 8088:80 nginx
