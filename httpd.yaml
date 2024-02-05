@@ -10,7 +10,7 @@
         state: present
     - name: index.html
       get_url:
-        url: http://www.rapakao.com
+        url: https://www.jobkorea.com
         dest: /var/www/html
     - name: service 
       service:
